@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Prime | Terceirização de Mão de Obra de Alto Padrão</title>
+  <meta name="description" content="Prime: terceirização de mão de obra de alto padrão. Portaria, recepção executiva, limpeza técnica, manutenção, copeiragem e facilities, com supervisão de perto.">
+  <meta name="theme-color" content="#0E0E11">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+  <meta property="og:title" content="Prime | Terceirização de Mão de Obra de Alto Padrão">
+  <meta property="og:description" content="Padrão Prime em cada serviço.">
+  <meta property="og:image" content="https://yurilarri.github.io/projeto-prime/img/og-image.png">
+  <meta property="og:url" content="https://yurilarri.github.io/projeto-prime/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira:wght@600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            vermelho: { DEFAULT: '#FE0912', escuro: '#C8050D', claro: '#FFE9EA' },
+            preto:    { DEFAULT: '#0E0E11', 2: '#18181D', 3: '#24242B' },
+            nevoa:    '#F3F3F5'
+          },
+          fontFamily: {
+            titulo: ['Saira', 'system-ui', 'sans-serif'],
+            sans: ['Barlow', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 3px solid #FE0912; outline-offset: 2px; }
+    .glass-header { background: rgba(14, 14, 17, 0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Abas (igual ao site da Athos) */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: entrar .5s cubic-bezier(.16, 1, .3, 1) both; }
+    @keyframes entrar { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+    .nav-btn { position: relative; }
+    .nav-btn::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 3px; background: #FE0912; transition: all .3s ease; transform: translateX(-50%); }
+    .nav-btn.active { color: #fff; }
+    .nav-btn.active::after { width: 100%; }
+
+    /* O arco da logo, desenhando-se no topo */
+    .arco path { stroke-dasharray: 1700; stroke-dashoffset: 1700; animation: arco 1.6s cubic-bezier(.65, 0, .35, 1) .2s forwards; }
+    @keyframes arco { to { stroke-dashoffset: 0; } }
+
+    .rotulo { font-family: Saira, sans-serif; font-size: 12px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+
+    details summary { list-style: none; cursor: pointer; }
+    details summary::-webkit-details-marker { display: none; }
+    details[open] .seta { transform: rotate(45deg); }
+
+    .opcao input:checked + span { background: #FE0912; border-color: #FE0912; color: #fff; }
+    .opcao input:focus-visible + span { outline: 3px solid #0E0E11; outline-offset: 2px; }
+
+
+    /* ===== Efeitos de tecnologia e movimento ===== */
+    /* Barra fina no alto: mostra quanto da página já foi lido */
+    #progresso { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 70; transform-origin: 0 50%; transform: scaleX(0);
+                 background: linear-gradient(90deg, #FE0912, #C8050D); pointer-events: none; }
+    /* Blocos que aparecem suavemente quando chegam na tela */
+    html [data-revelar] { opacity: 0; transform: translateY(26px);
+                          transition: opacity .8s cubic-bezier(.16,1,.3,1) var(--atraso, 0s), transform .8s cubic-bezier(.16,1,.3,1) var(--atraso, 0s); }
+    html [data-revelar].visivel { opacity: 1; transform: none; }
+    /* Título do topo: cada linha sobe de dentro de uma "janela" */
+    .linha-titulo { display: block; overflow: hidden; padding-bottom: .1em; margin-bottom: -.1em; }
+    .linha-titulo > span { display: inline-block; transform: translateY(110%); animation: subir 1s cubic-bezier(.16,1,.3,1) forwards; animation-delay: var(--atraso, .1s); }
+    @keyframes subir { to { transform: none; } }
+    .barra-crescer { transform-origin: left; animation: crescer .9s cubic-bezier(.16,1,.3,1) .1s both; }
+    @keyframes crescer { from { transform: scaleX(0); } }
+    /* Topo da página: entra sozinho assim que a página abre (não depende de rolar) */
+    .surgir { animation: surgir .9s cubic-bezier(.16,1,.3,1) var(--atraso, 0s) both; }
+    @keyframes surgir { from { opacity: 0; transform: translateY(22px); } }
+    /* Grade "tecnológica" no fundo, andando devagar */
+    .grade-tech { background-image: linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
+                  background-size: 56px 56px; animation: grade 20s linear infinite;
+                  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 25% 45%, #000 15%, transparent 78%);
+                          mask-image: radial-gradient(ellipse 75% 65% at 25% 45%, #000 15%, transparent 78%); }
+    @keyframes grade { to { background-position: 56px 56px; } }
+    /* Brilho que segue o mouse nos cartões */
+    .brilho:hover { background-image: radial-gradient(280px circle at var(--x, 50%) var(--y, 50%), rgba(254,9,18,.10), transparent 70%); }
+    /* Reflexo passando no botão principal */
+    .reflexo { position: relative; overflow: hidden; isolation: isolate; }
+    .reflexo::after { content: ''; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; z-index: -1; pointer-events: none;
+                      background: linear-gradient(100deg, transparent, rgba(255,255,255,.38), transparent); transform: skewX(-20deg);
+                      animation: reflexo 5s ease-in-out 1.8s infinite; }
+    @keyframes reflexo { 0%, 62% { left: -60%; } 100% { left: 135%; } }
+    /* Faixa com os serviços passando (para quando o mouse está em cima) */
+    .letreiro { display: flex; width: max-content; animation: correr 48s linear infinite; }
+    .letreiro-caixa:hover .letreiro { animation-play-state: paused; }
+    @keyframes correr { to { transform: translateX(-50%); } }
+    /* Selos que flutuam devagar */
+    .flutuar { animation: flutuar 6s ease-in-out infinite; }
+    @keyframes flutuar { 50% { transform: translateY(-9px); } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } .arco path { stroke-dashoffset: 0; } #progresso { display: none; } html [data-revelar], .linha-titulo > span { opacity: 1 !important; transform: none !important; } }
+
+    /* ===== Menu do celular: três barrinhas que viram um X ===== */
+    .hamburguer { position: relative; display: inline-block; width: 22px; height: 16px; }
+    .hamburguer span { position: absolute; left: 0; width: 100%; height: 2.5px; border-radius: 2px; background: currentColor;
+                       transition: transform .3s ease, opacity .2s ease, top .3s ease; }
+    .hamburguer span:nth-child(1) { top: 0; }
+    .hamburguer span:nth-child(2) { top: 6.75px; }
+    .hamburguer span:nth-child(3) { top: 13.5px; }
+    [aria-expanded="true"] .hamburguer span:nth-child(1) { top: 6.75px; transform: rotate(45deg); }
+    [aria-expanded="true"] .hamburguer span:nth-child(2) { opacity: 0; }
+    [aria-expanded="true"] .hamburguer span:nth-child(3) { top: 6.75px; transform: rotate(-45deg); }
+    .menu-celular { position: absolute; left: 0; right: 0; top: 100%; max-height: calc(100vh - 100%); max-height: calc(100dvh - 100%);
+                    overflow-y: auto; overscroll-behavior: contain; animation: descer .28s cubic-bezier(.16,1,.3,1); }
+    .menu-celular[hidden], #menu-fundo[hidden] { display: none; }
+    @keyframes descer { from { opacity: 0; transform: translateY(-10px); } }
+    .item-menu { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px; border-radius: 10px;
+                 transition: background-color .2s, color .2s; }
+    .item-menu svg { width: 18px; height: 18px; flex: none; opacity: .55; }
+    .item-menu { color: #D4D4D8; font-family: Saira, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; border-radius: 2px; } .item-menu:hover { background: #24242B; color: #fff; } .item-menu.ativo { background: #24242B; color: #fff; box-shadow: inset 3px 0 0 #FE0912; }
+
+    /* Botão flutuante do WhatsApp (só aparece quando o número está preenchido) */
+    #botao-whatsapp { position: fixed; right: 20px; bottom: 20px; z-index: 30; width: 60px; height: 60px; border-radius: 50%;
+                      display: flex; align-items: center; justify-content: center; background: #25D366; color: #fff;
+                      box-shadow: 0 10px 25px rgba(0,0,0,.25); transition: transform .2s ease; }
+    #botao-whatsapp:hover { transform: scale(1.08); }
+    #botao-whatsapp[hidden] { display: none; }
+    #botao-whatsapp::before { content: ''; position: absolute; inset: 0; border-radius: 50%; background: #25D366; z-index: -1; animation: onda-whats 2.4s ease-out infinite; }
+    @keyframes onda-whats { from { transform: scale(1); opacity: .5; } to { transform: scale(1.6); opacity: 0; } }
+    @media print { #botao-whatsapp { display: none; } }
+  </style>
+</head>
+<body class="bg-nevoa text-zinc-700 font-sans text-[17px] min-h-screen flex flex-col">
+  <div id="progresso" aria-hidden="true"></div>
+
+  <!-- Faixa de contato -->
+  <div class="bg-black text-zinc-400 text-[12px] font-semibold py-2 px-6 border-b border-white/5">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+        <a data-cfg-href="tel" class="flex items-center gap-1.5 hover:text-white transition-colors"><i data-lucide="phone" class="w-3.5 h-3.5 text-vermelho"></i> <span data-cfg="telefone"></span></a>
+        <span class="flex items-center gap-1.5"><i data-lucide="clock" class="w-3.5 h-3.5 text-vermelho"></i> <span data-cfg="horario"></span></span>
+        <span class="hidden md:flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-vermelho"></i> <span data-cfg="cidade"></span></span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="#denuncia" class="hover:text-white transition-colors">Canal Ético</a>
+        <span class="text-zinc-700">|</span>
+        <a href="#transparencia" class="hover:text-white transition-colors">Transparência</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topo e navegação (escuro, com a logo vermelha) -->
+  <header class="sticky top-0 z-50 glass-header border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6 h-16 lg:h-20 flex flex-nowrap items-center justify-between gap-x-4">
+      <a href="#inicio" class="flex-shrink-0" aria-label="Prime - início">
+        <img src="img/logo.png" alt="Prime" class="h-8 sm:h-9 w-auto">
+      </a>
+
+      <nav class="hidden lg:block lg:flex-1 min-w-0" aria-label="Seções do site">
+        <div class="flex items-center w-max xl:mx-auto gap-6 xl:gap-7 font-titulo text-[13px] font-bold tracking-wider text-zinc-400 whitespace-nowrap px-2">
+          <a href="#inicio" class="nav-btn py-3.5 lg:py-7 transition-colors hover:text-white" data-tab="inicio">INÍCIO</a>
+          <a href="#servicos" class="nav-btn py-3.5 lg:py-7 transition-colors hover:text-white" data-tab="servicos">SERVIÇOS</a>
+          <a href="#contrate" class="nav-btn py-3.5 lg:py-7 transition-colors hover:text-white" data-tab="contrate">CONTRATE</a>
+          <a href="#vagas" class="nav-btn py-3.5 lg:py-7 transition-colors hover:text-white" data-tab="vagas">TRABALHE CONOSCO</a>
+          <a href="#transparencia" class="nav-btn py-3.5 lg:py-7 transition-colors hover:text-white" data-tab="transparencia">TRANSPARÊNCIA</a>
+          <a href="#denuncia" class="nav-btn py-3.5 lg:py-7 transition-colors hover:text-white" data-tab="denuncia">CANAL ÉTICO</a>
+          <a href="#colaborador" class="nav-btn py-3.5 lg:py-7 transition-colors hover:text-white" data-tab="colaborador">COLABORADOR</a>
+        </div>
+      </nav>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <a data-portal="portal.html" class="flex-shrink-0 px-4 sm:px-5 py-2.5 rounded-sm text-[12px] font-titulo font-extrabold uppercase tracking-wider bg-vermelho hover:bg-vermelho-escuro text-white transition-colors flex items-center gap-2">
+          <i data-lucide="user-round" class="w-4 h-4"></i>
+          <span class="hidden 2xl:inline">Portal do Colaborador</span><span class="2xl:hidden">Portal</span>
+        </a>
+        <button type="button" id="menu-botao" class="lg:hidden w-11 h-11 rounded-lg flex items-center justify-center text-white hover:bg-white/10 transition-colors" aria-label="Abrir o menu" aria-expanded="false" aria-controls="menu-celular"><span class="hamburguer" aria-hidden="true"><span></span><span></span><span></span></span></button>
+      </div>
+    </div>
+    <!-- Menu do celular (abre pelas três barrinhas) -->
+    <div id="menu-celular" class="menu-celular lg:hidden bg-preto-2 border-b border-white/10 shadow-2xl" hidden>
+      <nav class="max-w-7xl mx-auto px-4 py-3" aria-label="Menu do site">
+        <ul id="menu-celular-lista" class="grid gap-1"></ul>
+        <div class="mt-3 mb-2 pt-4 border-t border-white/10 grid gap-3 px-2">
+          <a data-portal="portal.html" class="px-5 py-3.5 rounded-sm bg-vermelho hover:bg-vermelho-escuro text-white font-titulo font-extrabold uppercase tracking-wider text-sm flex items-center justify-center gap-2"><i data-lucide="user-round" class="w-4 h-4"></i> Portal do Colaborador</a>
+          <a data-cfg-href="tel" class="flex items-center justify-center gap-2 py-2 text-sm font-semibold text-zinc-400"><i data-lucide="phone" class="w-4 h-4 text-vermelho"></i> <span data-cfg="telefone"></span></a>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <div id="menu-fundo" class="fixed inset-0 z-40 bg-black/60 lg:hidden" hidden></div>
+
+  <div class="flex-1 flex flex-col">
+
+    <!-- ==================== 1. INÍCIO ==================== -->
+    <main id="tab-inicio" class="tab-content active flex-1">
+      <section class="relative bg-preto overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=75&w=2000&auto=format&fit=crop" alt="" class="absolute inset-0 w-full h-full object-cover opacity-35 grayscale">
+        <div class="absolute inset-0 bg-gradient-to-r from-preto via-preto/85 to-preto/30"></div>
+        <div class="absolute inset-0 grade-tech pointer-events-none" aria-hidden="true"></div>
+        <svg class="arco absolute left-0 top-10 w-full h-40 pointer-events-none" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M -20 120 C 400 10, 1000 0, 1460 70" fill="none" stroke="#FE0912" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 pt-36 pb-24 md:pt-44 md:pb-28">
+          <p class="rotulo text-vermelho mb-5 surgir">Terceirização de mão de obra</p>
+          <h1 class="font-titulo text-[2.6rem] sm:text-6xl md:text-7xl font-black text-white uppercase leading-[0.98] tracking-tight max-w-4xl">
+            <span class="linha-titulo"><span>Padrão <span class="text-vermelho">Prime</span></span></span>
+            <span class="linha-titulo"><span style="--atraso:.25s">em cada serviço.</span></span>
+          </h1>
+          <p class="mt-7 text-lg sm:text-xl text-zinc-300 max-w-2xl leading-relaxed surgir" style="--atraso:.45s">
+            Equipes treinadas, uniformizadas e supervisionadas de perto, para a sua empresa ter um serviço impecável todos os dias, sem dor de cabeça com contratação.
+          </p>
+          <div class="mt-10 flex flex-col sm:flex-row gap-4 surgir" style="--atraso:.6s">
+            <a href="#contrate" class="reflexo px-8 py-4 bg-vermelho hover:bg-vermelho-escuro text-white font-titulo font-extrabold uppercase tracking-wider text-sm rounded-sm transition-colors flex items-center justify-center gap-2 whitespace-nowrap">
+              Solicitar proposta <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+            <a href="#servicos" class="px-8 py-4 border-2 border-white/30 hover:border-white text-white font-titulo font-extrabold uppercase tracking-wider text-sm rounded-sm transition-colors flex items-center justify-center gap-2 whitespace-nowrap">
+              Nossos serviços
+            </a>
+          </div>
+          <ul class="mt-16 grid sm:grid-cols-3 gap-6 sm:gap-0 sm:divide-x sm:divide-white/15 max-w-4xl surgir" style="--atraso:.8s">
+            <li class="sm:pr-8 flex gap-3 items-start"><i data-lucide="graduation-cap" class="w-6 h-6 text-vermelho shrink-0"></i><span><span class="block font-titulo font-bold text-white uppercase tracking-wide">Equipes treinadas</span><span class="text-sm text-zinc-400">Capacitação antes e durante o contrato.</span></span></li>
+            <li class="sm:px-8 flex gap-3 items-start"><i data-lucide="eye" class="w-6 h-6 text-vermelho shrink-0"></i><span><span class="block font-titulo font-bold text-white uppercase tracking-wide">Supervisão de perto</span><span class="text-sm text-zinc-400">Visitas e acompanhamento da operação.</span></span></li>
+            <li class="sm:pl-8 flex gap-3 items-start"><i data-lucide="scale" class="w-6 h-6 text-vermelho shrink-0"></i><span><span class="block font-titulo font-bold text-white uppercase tracking-wide">Tudo dentro da lei</span><span class="text-sm text-zinc-400">Obrigações trabalhistas sempre em dia.</span></span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Faixa vermelha com os serviços passando -->
+      <div class="letreiro-caixa overflow-hidden bg-vermelho py-4" aria-hidden="true">
+        <div class="letreiro font-titulo font-extrabold uppercase tracking-wider text-white text-base sm:text-lg" id="letreiro"></div>
+      </div>
+
+      <!-- Números: contam sozinhos quando aparecem na tela -->
+      <section class="bg-white border-b border-zinc-200">
+        <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-2 lg:grid-cols-4 gap-8" data-revelar-grupo>
+          <div class="border-l-4 border-vermelho pl-5"><span class="font-titulo text-5xl font-black text-preto" data-contar="8" data-qtd-servicos>8</span><span class="block rotulo text-zinc-500 mt-1">Serviços</span></div>
+          <div class="border-l-4 border-preto pl-5"><span class="font-titulo text-5xl font-black text-preto" data-contar="4" data-qtd-modelos>4</span><span class="block rotulo text-zinc-500 mt-1">Modelos de contratação</span></div>
+          <div class="border-l-4 border-vermelho pl-5"><span class="font-titulo text-5xl font-black text-preto" data-contar="8">8</span><span class="block rotulo text-zinc-500 mt-1">Compromissos do padrão Prime</span></div>
+          <div class="border-l-4 border-preto pl-5"><span class="font-titulo text-5xl font-black text-preto" data-contar="6">6</span><span class="block rotulo text-zinc-500 mt-1">Segmentos atendidos</span></div>
+        </div>
+      </section>
+
+      <!-- Serviços -->
+      <section class="max-w-7xl mx-auto px-6 py-20 w-full">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10" data-revelar>
+          <div class="max-w-2xl">
+            <p class="rotulo text-vermelho-escuro mb-3">Serviços</p>
+            <h2 class="font-titulo text-3xl md:text-4xl font-black text-preto uppercase leading-tight">Facilities completo, com mão de obra de primeira.</h2>
+          </div>
+          <a href="#servicos" class="font-titulo font-extrabold text-sm uppercase tracking-wider text-preto hover:text-vermelho-escuro flex items-center gap-2 shrink-0">Ver todos <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        </div>
+        <div id="servicos-destaque" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-zinc-300 border border-zinc-300" data-revelar-grupo></div>
+      </section>
+
+      <!-- Modelos de contratação -->
+      <section class="bg-preto">
+        <div class="max-w-7xl mx-auto px-6 py-20">
+          <div class="max-w-2xl" data-revelar>
+            <p class="rotulo text-vermelho mb-3">Do jeito que a sua operação precisa</p>
+            <h2 class="font-titulo text-3xl md:text-4xl font-black text-white uppercase leading-tight">Modelos de contratação</h2>
+          </div>
+          <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5" data-revelar-grupo>
+            <div class="brilho bg-preto-2 border-t-4 border-vermelho p-7 hover:-translate-y-1 transition"><i data-lucide="map-pin-check" class="w-7 h-7 text-vermelho"></i><h3 class="mt-5 font-titulo text-lg font-extrabold text-white uppercase tracking-wide">Posto fixo</h3><p class="mt-2 text-sm text-zinc-400 leading-relaxed">Equipe dedicada ao seu local, com escala definida e substituição garantida.</p></div>
+            <div class="brilho bg-preto-2 border-t-4 border-vermelho p-7 hover:-translate-y-1 transition"><i data-lucide="calendar-clock" class="w-7 h-7 text-vermelho"></i><h3 class="mt-5 font-titulo text-lg font-extrabold text-white uppercase tracking-wide">Cobertura</h3><p class="mt-2 text-sm text-zinc-400 leading-relaxed">Profissionais para cobrir férias, licenças e afastamentos da sua equipe própria.</p></div>
+            <div class="brilho bg-preto-2 border-t-4 border-vermelho p-7 hover:-translate-y-1 transition"><i data-lucide="route" class="w-7 h-7 text-vermelho"></i><h3 class="mt-5 font-titulo text-lg font-extrabold text-white uppercase tracking-wide">Equipe volante</h3><p class="mt-2 text-sm text-zinc-400 leading-relaxed">Um time que atende várias unidades em rota, ideal para redes e filiais.</p></div>
+            <div class="brilho bg-preto-2 border-t-4 border-vermelho p-7 hover:-translate-y-1 transition"><i data-lucide="zap" class="w-7 h-7 text-vermelho"></i><h3 class="mt-5 font-titulo text-lg font-extrabold text-white uppercase tracking-wide">Demanda pontual</h3><p class="mt-2 text-sm text-zinc-400 leading-relaxed">Mutirões, limpeza pós-obra e eventos, com a equipe montada só para isso.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Padrão Prime -->
+      <section class="max-w-7xl mx-auto px-6 py-20 w-full grid lg:grid-cols-12 gap-12 items-start">
+        <div class="lg:col-span-5" data-revelar>
+          <p class="rotulo text-vermelho-escuro mb-4">O que você recebe</p>
+          <h2 class="font-titulo text-3xl md:text-4xl font-black text-preto uppercase leading-tight">O padrão Prime.</h2>
+          <p class="mt-6 text-zinc-600 text-lg leading-relaxed">Alto padrão não é discurso: é uma lista de compromissos que valem em todo contrato, do primeiro ao último dia.</p>
+          <a href="#contrate" class="mt-8 inline-flex px-7 py-4 bg-preto hover:bg-vermelho text-white font-titulo font-extrabold uppercase tracking-wider text-sm rounded-sm transition-colors items-center gap-2">Quero o padrão Prime <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        </div>
+        <ul class="lg:col-span-7 grid sm:grid-cols-2 gap-x-8 gap-y-5" data-revelar-grupo>
+          <li class="flex gap-3 border-b border-zinc-300 pb-5"><span class="w-4 h-[3px] bg-vermelho mt-3 shrink-0"></span><span><strong class="font-titulo uppercase tracking-wide text-preto">Seleção rigorosa</strong><span class="block text-sm text-zinc-600">Entrevista, checagem de referências e documentação.</span></span></li>
+          <li class="flex gap-3 border-b border-zinc-300 pb-5"><span class="w-4 h-[3px] bg-vermelho mt-3 shrink-0"></span><span><strong class="font-titulo uppercase tracking-wide text-preto">Uniforme padronizado</strong><span class="block text-sm text-zinc-600">Apresentação impecável e EPIs adequados.</span></span></li>
+          <li class="flex gap-3 border-b border-zinc-300 pb-5"><span class="w-4 h-[3px] bg-vermelho mt-3 shrink-0"></span><span><strong class="font-titulo uppercase tracking-wide text-preto">Postura e atendimento</strong><span class="block text-sm text-zinc-600">Treinamento de conduta, além da técnica.</span></span></li>
+          <li class="flex gap-3 border-b border-zinc-300 pb-5"><span class="w-4 h-[3px] bg-vermelho mt-3 shrink-0"></span><span><strong class="font-titulo uppercase tracking-wide text-preto">Reposição imediata</strong><span class="block text-sm text-zinc-600">Faltou alguém? O posto não fica vazio.</span></span></li>
+          <li class="flex gap-3 border-b border-zinc-300 pb-5"><span class="w-4 h-[3px] bg-vermelho mt-3 shrink-0"></span><span><strong class="font-titulo uppercase tracking-wide text-preto">Supervisão em campo</strong><span class="block text-sm text-zinc-600">Visitas regulares para conferir a qualidade.</span></span></li>
+          <li class="flex gap-3 border-b border-zinc-300 pb-5"><span class="w-4 h-[3px] bg-vermelho mt-3 shrink-0"></span><span><strong class="font-titulo uppercase tracking-wide text-preto">Documentação em dia</strong><span class="block text-sm text-zinc-600">Comprovantes trabalhistas disponíveis ao cliente.</span></span></li>
+          <li class="flex gap-3 border-b border-zinc-300 pb-5"><span class="w-4 h-[3px] bg-vermelho mt-3 shrink-0"></span><span><strong class="font-titulo uppercase tracking-wide text-preto">Canal direto</strong><span class="block text-sm text-zinc-600">Um responsável pelo seu contrato, sem rodeios.</span></span></li>
+          <li class="flex gap-3 border-b border-zinc-300 pb-5"><span class="w-4 h-[3px] bg-vermelho mt-3 shrink-0"></span><span><strong class="font-titulo uppercase tracking-wide text-preto">Melhoria contínua</strong><span class="block text-sm text-zinc-600">Reuniões de acompanhamento e ajustes.</span></span></li>
+        </ul>
+      </section>
+
+      <!-- Segmentos -->
+      <section class="max-w-7xl mx-auto px-6 pb-20 w-full">
+        <div class="bg-white p-8 sm:p-10 shadow-sm">
+          <p class="rotulo text-vermelho-escuro mb-5">Segmentos atendidos</p>
+          <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-center" data-revelar-grupo>
+            <li><i data-lucide="building-2" class="w-8 h-8 mx-auto text-preto"></i><span class="mt-3 block font-titulo font-bold uppercase text-sm tracking-wide text-preto">Corporativo</span></li>
+            <li><i data-lucide="building" class="w-8 h-8 mx-auto text-preto"></i><span class="mt-3 block font-titulo font-bold uppercase text-sm tracking-wide text-preto">Condomínios</span></li>
+            <li><i data-lucide="factory" class="w-8 h-8 mx-auto text-preto"></i><span class="mt-3 block font-titulo font-bold uppercase text-sm tracking-wide text-preto">Indústrias</span></li>
+            <li><i data-lucide="hospital" class="w-8 h-8 mx-auto text-preto"></i><span class="mt-3 block font-titulo font-bold uppercase text-sm tracking-wide text-preto">Saúde</span></li>
+            <li><i data-lucide="shopping-bag" class="w-8 h-8 mx-auto text-preto"></i><span class="mt-3 block font-titulo font-bold uppercase text-sm tracking-wide text-preto">Varejo</span></li>
+            <li><i data-lucide="warehouse" class="w-8 h-8 mx-auto text-preto"></i><span class="mt-3 block font-titulo font-bold uppercase text-sm tracking-wide text-preto">Logística</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Quem somos -->
+      <section class="max-w-7xl mx-auto px-6 pb-20 w-full grid lg:grid-cols-12 gap-12">
+        <div class="lg:col-span-5" data-revelar>
+          <p class="rotulo text-vermelho-escuro mb-4">Quem somos</p>
+          <h2 class="font-titulo text-3xl md:text-4xl font-black text-preto uppercase leading-tight">Excelência não é detalhe. É o nosso padrão.</h2>
+          <p class="mt-6 text-zinc-600 text-lg leading-relaxed">A Prime é especialista em terceirização de mão de obra para empresas que não abrem mão de qualidade. A gente cuida de cada detalhe para o seu serviço sair impecável.</p>
+        </div>
+        <div class="lg:col-span-7 grid sm:grid-cols-2 gap-5" data-revelar-grupo>
+          <div class="bg-white p-8 border-t-4 border-vermelho shadow-sm"><h3 class="font-titulo text-xl font-extrabold text-preto uppercase tracking-wide">Missão</h3><p class="mt-3 text-zinc-600 leading-relaxed">Entregar mão de obra terceirizada com qualidade superior, segurança e respeito, criando parcerias duradouras.</p></div>
+          <div class="bg-white p-8 border-t-4 border-preto shadow-sm"><h3 class="font-titulo text-xl font-extrabold text-preto uppercase tracking-wide">Visão</h3><p class="mt-3 text-zinc-600 leading-relaxed">Ser sinônimo de alto padrão em terceirização, reconhecida pela qualidade das equipes e pela confiança dos clientes.</p></div>
+          <div class="sm:col-span-2 bg-preto p-8 text-white">
+            <h3 class="font-titulo text-xl font-extrabold uppercase tracking-wide">Valores</h3>
+            <ul class="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 font-titulo font-bold uppercase text-sm tracking-wide">
+              <li class="flex items-center gap-2"><span class="w-4 h-[3px] bg-vermelho"></span>Excelência</li>
+              <li class="flex items-center gap-2"><span class="w-4 h-[3px] bg-vermelho"></span>Ética</li>
+              <li class="flex items-center gap-2"><span class="w-4 h-[3px] bg-vermelho"></span>Disciplina</li>
+              <li class="flex items-center gap-2"><span class="w-4 h-[3px] bg-vermelho"></span>Respeito</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Portal do Colaborador -->
+      <section class="bg-vermelho">
+        <div class="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-12 gap-8 items-center" data-revelar>
+          <div class="md:col-span-7">
+            <p class="rotulo text-white/80 mb-2">Para quem já faz parte</p>
+            <h2 class="font-titulo text-3xl md:text-4xl font-black text-white uppercase">Portal do Colaborador</h2>
+            <p class="mt-3 text-white text-lg leading-relaxed">Envie atestados, leia os comunicados do RH, mantenha seus dados em dia e fale com a Ouvidoria, tudo pelo celular.</p>
+          </div>
+          <div class="md:col-span-5 flex flex-col sm:flex-row md:justify-end gap-3">
+            <a data-portal="portal.html" class="px-7 py-4 bg-preto hover:bg-black text-white font-titulo font-extrabold uppercase tracking-wider text-sm rounded-sm transition-colors flex items-center justify-center gap-2 whitespace-nowrap"><i data-lucide="log-in" class="w-4 h-4"></i> Acessar o portal</a>
+            <a href="#colaborador" class="px-7 py-4 border-2 border-white/60 hover:border-white text-white font-titulo font-extrabold uppercase tracking-wider text-sm rounded-sm transition-colors text-center whitespace-nowrap">Saiba mais</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==================== 2. SERVIÇOS ==================== -->
+    <main id="tab-servicos" class="tab-content flex-1 w-full">
+      <section class="bg-preto">
+        <div class="max-w-7xl mx-auto px-6 pt-16 pb-14">
+          <p class="rotulo text-vermelho mb-3">Serviços</p>
+          <h1 class="font-titulo text-4xl md:text-6xl font-black text-white uppercase tracking-tight max-w-4xl">Mão de obra para toda a operação.</h1>
+          <p class="text-zinc-300 text-lg mt-4 max-w-2xl leading-relaxed">Da portaria à manutenção: escolha as funções, a gente monta a equipe, treina, uniformiza e supervisiona.</p>
+        </div>
+      </section>
+
+      <section class="max-w-7xl mx-auto px-6 py-16">
+        <div id="servicos-lista" class="space-y-4" data-revelar-grupo></div>
+      </section>
+
+      <section class="max-w-7xl mx-auto px-6 pb-16 w-full">
+        <div class="bg-white p-9 md:p-12 shadow-sm border-l-4 border-vermelho">
+          <h2 class="font-titulo text-2xl md:text-3xl font-black text-preto uppercase">Incluso em todo contrato</h2>
+          <ul class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4 text-zinc-700">
+            <li class="flex gap-3"><i data-lucide="check" class="w-5 h-5 text-vermelho-escuro shrink-0 mt-0.5"></i>Recrutamento, seleção e contratação</li>
+            <li class="flex gap-3"><i data-lucide="check" class="w-5 h-5 text-vermelho-escuro shrink-0 mt-0.5"></i>Salários, encargos e benefícios</li>
+            <li class="flex gap-3"><i data-lucide="check" class="w-5 h-5 text-vermelho-escuro shrink-0 mt-0.5"></i>Uniformes padronizados e EPIs</li>
+            <li class="flex gap-3"><i data-lucide="check" class="w-5 h-5 text-vermelho-escuro shrink-0 mt-0.5"></i>Treinamento técnico e de conduta</li>
+            <li class="flex gap-3"><i data-lucide="check" class="w-5 h-5 text-vermelho-escuro shrink-0 mt-0.5"></i>Reposição de faltas, férias e afastamentos</li>
+            <li class="flex gap-3"><i data-lucide="check" class="w-5 h-5 text-vermelho-escuro shrink-0 mt-0.5"></i>Supervisão e visitas de qualidade</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="max-w-4xl mx-auto px-6 pb-16 w-full">
+        <p class="rotulo text-vermelho-escuro mb-3">Dúvidas</p>
+        <h2 class="font-titulo text-3xl font-black text-preto uppercase mb-8">Perguntas frequentes</h2>
+        <div class="space-y-3">
+          <details class="bg-white p-6 shadow-sm"><summary class="flex justify-between items-center gap-4 font-titulo font-bold uppercase tracking-wide text-preto">Os profissionais são contratados por quem?<i data-lucide="plus" class="seta w-5 h-5 text-vermelho shrink-0 transition-transform"></i></summary><p class="mt-3 text-zinc-600 leading-relaxed">Pela Prime, com carteira assinada. Assumimos salários, encargos, benefícios e férias. A sua empresa paga uma fatura mensal pelo serviço.</p></details>
+          <details class="bg-white p-6 shadow-sm"><summary class="flex justify-between items-center gap-4 font-titulo font-bold uppercase tracking-wide text-preto">Qual a diferença entre posto fixo e equipe volante?<i data-lucide="plus" class="seta w-5 h-5 text-vermelho shrink-0 transition-transform"></i></summary><p class="mt-3 text-zinc-600 leading-relaxed">No posto fixo, a equipe fica no seu local todos os dias. Na equipe volante, o mesmo time passa por várias unidades em dias e horários combinados.</p></details>
+          <details class="bg-white p-6 shadow-sm"><summary class="flex justify-between items-center gap-4 font-titulo font-bold uppercase tracking-wide text-preto">Vocês atendem só uma vez, por exemplo um pós-obra?<i data-lucide="plus" class="seta w-5 h-5 text-vermelho shrink-0 transition-transform"></i></summary><p class="mt-3 text-zinc-600 leading-relaxed">Sim. Na demanda pontual montamos a equipe para um serviço específico, com data e escopo definidos.</p></details>
+          <details class="bg-white p-6 shadow-sm"><summary class="flex justify-between items-center gap-4 font-titulo font-bold uppercase tracking-wide text-preto">Como vocês garantem a qualidade?<i data-lucide="plus" class="seta w-5 h-5 text-vermelho shrink-0 transition-transform"></i></summary><p class="mt-3 text-zinc-600 leading-relaxed">Com supervisão em campo, visitas regulares e um responsável pelo contrato que acompanha os pontos de melhoria com você.</p></details>
+          <details class="bg-white p-6 shadow-sm"><summary class="flex justify-between items-center gap-4 font-titulo font-bold uppercase tracking-wide text-preto">Posso solicitar a substituição de um profissional?<i data-lucide="plus" class="seta w-5 h-5 text-vermelho shrink-0 transition-transform"></i></summary><p class="mt-3 text-zinc-600 leading-relaxed">Pode. Fale com a supervisão e tratamos o caso o quanto antes.</p></details>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==================== 3. CONTRATE ==================== -->
+    <main id="tab-contrate" class="tab-content flex-1 max-w-7xl mx-auto px-6 py-16 w-full">
+      <div class="mb-10 max-w-3xl">
+        <p class="rotulo text-vermelho-escuro mb-3">Contrate a Prime</p>
+        <h1 class="font-titulo text-4xl md:text-5xl font-black text-preto uppercase tracking-tight">Solicite uma proposta</h1>
+        <p class="text-zinc-500 text-lg mt-2">Conte o que a sua operação precisa. Um consultor da Prime entra em contato para montar a proposta.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <div class="lg:col-span-8">
+          <form id="form-orcamento" class="relative bg-white p-7 sm:p-10 shadow-xl shadow-zinc-300/40 border-t-4 border-vermelho space-y-6" novalidate>
+            <div class="absolute -left-[9999px]" aria-hidden="true"><label>Não preencha<input type="text" name="site" tabindex="-1" autocomplete="off"></label></div>
+
+            <fieldset>
+              <legend class="rotulo text-zinc-500 mb-3">Serviços de interesse *</legend>
+              <div id="opcoes-servicos" class="flex flex-wrap gap-2"></div>
+            </fieldset>
+
+            <fieldset>
+              <legend class="rotulo text-zinc-500 mb-3">Modelo de contratação</legend>
+              <div class="flex flex-wrap gap-2" id="opcoes-modelo"></div>
+            </fieldset>
+
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div><label for="o-nome" class="block rotulo text-zinc-500 mb-2">Seu nome *</label><input id="o-nome" type="text" required autocomplete="name" maxlength="150" class="w-full px-4 py-3.5 bg-nevoa border border-zinc-200 rounded-sm focus:bg-white focus:ring-2 focus:ring-vermelho focus:border-transparent outline-none transition"></div>
+              <div><label for="o-empresa" class="block rotulo text-zinc-500 mb-2">Empresa</label><input id="o-empresa" type="text" autocomplete="organization" maxlength="150" class="w-full px-4 py-3.5 bg-nevoa border border-zinc-200 rounded-sm focus:bg-white focus:ring-2 focus:ring-vermelho focus:border-transparent outline-none transition"></div>
+              <div><label for="o-telefone" class="block rotulo text-zinc-500 mb-2">Telefone / WhatsApp *</label><input id="o-telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(85) 99999-9999" maxlength="15" class="w-full px-4 py-3.5 bg-nevoa border border-zinc-200 rounded-sm focus:bg-white focus:ring-2 focus:ring-vermelho focus:border-transparent outline-none transition"></div>
+              <div><label for="o-email" class="block rotulo text-zinc-500 mb-2">E-mail</label><input id="o-email" type="email" autocomplete="email" maxlength="255" class="w-full px-4 py-3.5 bg-nevoa border border-zinc-200 rounded-sm focus:bg-white focus:ring-2 focus:ring-vermelho focus:border-transparent outline-none transition"></div>
+              <div><label for="o-cidade" class="block rotulo text-zinc-500 mb-2">Cidade</label><input id="o-cidade" type="text" autocomplete="address-level2" maxlength="100" class="w-full px-4 py-3.5 bg-nevoa border border-zinc-200 rounded-sm focus:bg-white focus:ring-2 focus:ring-vermelho focus:border-transparent outline-none transition"></div>
+              <div class="grid grid-cols-2 gap-3">
+                <div><label for="o-qtd" class="block rotulo text-zinc-500 mb-2">Profissionais</label><input id="o-qtd" type="number" min="1" max="5000" inputmode="numeric" placeholder="Ex.: 6" class="w-full px-4 py-3.5 bg-nevoa border border-zinc-200 rounded-sm focus:bg-white focus:ring-2 focus:ring-vermelho focus:border-transparent outline-none transition"></div>
+                <div><label for="o-cnpj" class="block rotulo text-zinc-500 mb-2">CNPJ</label><input id="o-cnpj" type="text" inputmode="numeric" placeholder="Opcional" maxlength="18" class="w-full px-4 py-3.5 bg-nevoa border border-zinc-200 rounded-sm focus:bg-white focus:ring-2 focus:ring-vermelho focus:border-transparent outline-none transition"></div>
+              </div>
+            </div>
+            <div><label for="o-msg" class="block rotulo text-zinc-500 mb-2">Detalhes da operação</label><textarea id="o-msg" rows="4" maxlength="3000" placeholder="Ex.: portaria 24h com 4 porteiros 12x36 e 2 auxiliares de limpeza." class="w-full px-4 py-3.5 bg-nevoa border border-zinc-200 rounded-sm focus:bg-white focus:ring-2 focus:ring-vermelho focus:border-transparent outline-none transition resize-none"></textarea></div>
+
+            <div id="o-aviso" class="hidden" role="alert"></div>
+
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+              <button type="submit" id="o-enviar" class="px-9 py-4 bg-vermelho hover:bg-vermelho-escuro text-white font-titulo font-extrabold uppercase tracking-wider text-sm rounded-sm transition-colors flex items-center justify-center gap-2"><i data-lucide="send" class="w-4 h-4"></i> Solicitar proposta</button>
+              <p class="text-sm text-zinc-500">* Obrigatório. Usamos seus dados só para responder a solicitação.</p>
+            </div>
+          </form>
+
+          <div id="o-sucesso" class="hidden bg-preto text-white p-10 text-center">
+            <i data-lucide="circle-check-big" class="w-14 h-14 text-vermelho mx-auto"></i>
+            <h2 class="mt-5 font-titulo text-3xl font-black uppercase">Solicitação recebida</h2>
+            <p class="mt-2 text-zinc-300">Um consultor da Prime vai entrar em contato. Seu protocolo:</p>
+            <p id="o-protocolo" class="mt-3 font-titulo text-2xl font-black text-vermelho"></p>
+            <button type="button" id="o-novo" class="mt-7 px-7 py-3 border-2 border-white/40 hover:border-white text-white font-titulo font-extrabold uppercase tracking-wider text-sm rounded-sm transition-colors">Nova solicitação</button>
+          </div>
+        </div>
+
+        <aside class="lg:col-span-4 space-y-4">
+          <div class="bg-preto text-white p-7">
+            <h2 class="font-titulo font-extrabold uppercase tracking-wide">Próximos passos</h2>
+            <ol class="mt-5 space-y-4 text-zinc-300">
+              <li class="flex gap-3"><span class="font-titulo font-black text-vermelho">01</span>Um consultor liga para entender a operação.</li>
+              <li class="flex gap-3"><span class="font-titulo font-black text-vermelho">02</span>Visita técnica ao local, quando necessário.</li>
+              <li class="flex gap-3"><span class="font-titulo font-black text-vermelho">03</span>Proposta com postos, escalas e valores.</li>
+            </ol>
+          </div>
+          <a data-cfg-href="tel" class="bg-white p-6 shadow-sm flex gap-4 border-l-4 border-transparent hover:border-vermelho transition-colors">
+            <span class="w-12 h-12 bg-preto text-vermelho flex items-center justify-center shrink-0"><i data-lucide="phone" class="w-5 h-5"></i></span>
+            <span><span class="block font-titulo font-extrabold uppercase text-preto">Telefone</span><span class="block font-titulo font-black text-xl text-preto" data-cfg="telefone"></span><span class="block text-zinc-500 text-sm" data-cfg="horario"></span></span>
+          </a>
+          <a data-cfg-href="mailto" class="bg-white p-6 shadow-sm flex gap-4 border-l-4 border-transparent hover:border-vermelho transition-colors">
+            <span class="w-12 h-12 bg-preto text-vermelho flex items-center justify-center shrink-0"><i data-lucide="mail" class="w-5 h-5"></i></span>
+            <span class="min-w-0"><span class="block font-titulo font-extrabold uppercase text-preto">E-mail</span><span class="block text-zinc-600 text-sm break-all" data-cfg="email"></span></span>
+          </a>
+          <a data-cfg-href="mapa" target="_blank" rel="noopener" class="bg-white p-6 shadow-sm flex gap-4 border-l-4 border-transparent hover:border-vermelho transition-colors">
+            <span class="w-12 h-12 bg-preto text-vermelho flex items-center justify-center shrink-0"><i data-lucide="map-pin" class="w-5 h-5"></i></span>
+            <span><span class="block font-titulo font-extrabold uppercase text-preto">Endereço</span><span class="block text-zinc-600 text-sm" data-cfg="endereco"></span></span>
+          </a>
+        </aside>
+      </div>
+    </main>
+
+    <!-- ==================== 4. TRABALHE CONOSCO ==================== -->
+    <main id="tab-vagas" class="tab-content flex-1 w-full">
+      <section class="bg-preto">
+        <div class="max-w-6xl mx-auto px-6 py-16">
+          <p class="rotulo text-vermelho mb-3">Trabalhe conosco</p>
+          <h1 class="font-titulo text-4xl md:text-5xl font-black text-white uppercase tracking-tight">Faça parte do time Prime</h1>
+          <p class="text-zinc-300 text-lg mt-3 max-w-2xl">Aqui você tem carteira assinada, treinamento, uniforme e uma supervisão que te dá suporte de verdade.</p>
+          <ul class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-white">
+            <li class="flex gap-3"><i data-lucide="file-signature" class="w-6 h-6 text-vermelho shrink-0"></i><span class="font-titulo font-bold uppercase tracking-wide text-sm">Carteira assinada</span></li>
+            <li class="flex gap-3"><i data-lucide="graduation-cap" class="w-6 h-6 text-vermelho shrink-0"></i><span class="font-titulo font-bold uppercase tracking-wide text-sm">Treinamento contínuo</span></li>
+            <li class="flex gap-3"><i data-lucide="shirt" class="w-6 h-6 text-vermelho shrink-0"></i><span class="font-titulo font-bold uppercase tracking-wide text-sm">Uniforme e EPI</span></li>
+            <li class="flex gap-3"><i data-lucide="smartphone" class="w-6 h-6 text-vermelho shrink-0"></i><span class="font-titulo font-bold uppercase tracking-wide text-sm">Portal do Colaborador</span></li>
+          </ul>
+        </div>
+      </section>
+      <section class="max-w-6xl mx-auto px-6 py-14">
+        <h2 class="font-titulo text-2xl font-black text-preto uppercase mb-5">Vagas abertas</h2>
+        <div id="lista-vagas" class="space-y-4"></div>
+      </section>
+    </main>
+
+    <!-- ==================== 5. TRANSPARÊNCIA ==================== -->
+    <main id="tab-transparencia" class="tab-content flex-1 max-w-6xl mx-auto px-6 py-16 w-full">
+      <div class="max-w-3xl mb-12">
+        <p class="rotulo text-vermelho-escuro mb-3">Governança</p>
+        <h1 class="font-titulo text-4xl md:text-5xl font-black text-preto uppercase tracking-tight">Transparência</h1>
+        <p class="text-zinc-600 text-lg mt-4 leading-relaxed">Regras claras, políticas abertas e relatórios disponíveis para todos. Ética e igualdade fazem parte do padrão Prime.</p>
+      </div>
+      <div id="lista-documentos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </main>
+
+    <!-- ==================== 6. CANAL ÉTICO ==================== -->
+    <main id="tab-denuncia" class="tab-content flex-1 max-w-5xl mx-auto px-6 py-16 w-full">
+      <div class="max-w-3xl mb-10">
+        <p class="rotulo text-vermelho-escuro mb-3">Canal Ético</p>
+        <h1 class="font-titulo text-3xl sm:text-5xl font-black text-preto uppercase tracking-tight">Algo errado? Denuncie.</h1>
+        <p class="text-zinc-600 mt-4 text-lg leading-relaxed">Assédio, fraude, discriminação ou qualquer conduta contra o nosso Código de Conduta. Garantimos sigilo e não aceitamos retaliação contra quem denuncia de boa-fé.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="bg-preto text-white p-9 flex flex-col">
+          <i data-lucide="shield-check" class="w-9 h-9 text-vermelho"></i>
+          <h2 class="mt-5 font-titulo text-xl font-extrabold uppercase tracking-wide">Sou colaborador</h2>
+          <p class="mt-2 text-zinc-300 leading-relaxed flex-1">Use a <strong class="text-white">Ouvidoria</strong> do Portal do Colaborador. Você pode enviar <strong class="text-white">sem se identificar</strong> e recebe um protocolo para acompanhar.</p>
+          <a data-portal="portal.html" class="mt-7 px-6 py-4 bg-vermelho hover:bg-vermelho-escuro text-white font-titulo font-extrabold uppercase tracking-wider text-sm rounded-sm transition-colors flex items-center justify-center gap-2"><i data-lucide="lock" class="w-4 h-4"></i> Ir para a Ouvidoria</a>
+        </div>
+        <div class="bg-white p-9 flex flex-col shadow-sm">
+          <i data-lucide="mail" class="w-9 h-9 text-preto"></i>
+          <h2 class="mt-5 font-titulo text-xl font-extrabold text-preto uppercase tracking-wide">Não sou colaborador</h2>
+          <p class="mt-2 text-zinc-600 leading-relaxed flex-1">Clientes, fornecedores e qualquer pessoa podem usar o <strong>formulário abaixo, sem se identificar</strong>, ou escrever para o canal ético por e-mail. <span class="text-zinc-500">Pelo e-mail, o seu endereço aparece para nós.</span></p>
+          <a data-cfg-href="mailtoEtica" class="mt-7 px-6 py-4 border-2 border-preto text-preto hover:bg-preto hover:text-white font-titulo font-extrabold uppercase tracking-wider text-sm rounded-sm transition-colors flex items-center justify-center gap-2"><i data-lucide="send" class="w-4 h-4"></i> Escrever para o canal ético</a>
+        </div>
+      </div>
+      <!-- Denúncia pelo site: qualquer pessoa pode usar, sem se identificar. Vai para a Ouvidoria do Painel do DP. -->
+      <form id="form-denuncia" class="mt-6 bg-white p-9 shadow-sm border-t-4 border-vermelho" novalidate data-revelar>
+        <div id="den-campos" class="space-y-6">
+          <div>
+            <h2 class="font-titulo text-xl font-extrabold text-preto uppercase tracking-wide flex items-center gap-2"><i data-lucide="shield-alert" class="w-5 h-5 text-vermelho-escuro"></i>Denunciar pelo site</h2>
+            <p class="mt-2 text-zinc-600 leading-relaxed">Qualquer pessoa pode usar: colaborador, ex-colaborador, cliente ou fornecedor. <strong>Não precisa se identificar.</strong> No fim, você recebe um número de protocolo.</p>
+          </div>
+          <fieldset>
+            <legend class="rotulo text-zinc-500 mb-3">Motivo *</legend>
+            <div id="den-motivos" class="flex flex-wrap gap-2"></div>
+          </fieldset>
+          <div>
+            <label for="den-relato" class="rotulo text-zinc-500 block mb-2">O que aconteceu? *</label>
+            <textarea id="den-relato" rows="6" maxlength="5000" class="w-full px-4 py-3.5 bg-nevoa border border-zinc-200 rounded-sm focus:bg-white focus:ring-2 focus:ring-vermelho focus:border-transparent outline-none transition resize-none" placeholder="Conte o que aconteceu, quando, onde e quem estava envolvido, se souber."></textarea>
+          </div>
+          <details class="bg-nevoa p-5">
+            <summary class="rotulo text-zinc-500 cursor-pointer">Quero deixar um contato (opcional)</summary>
+            <div class="mt-4 grid sm:grid-cols-3 gap-4">
+              <input id="den-nome" type="text" maxlength="150" autocomplete="name" placeholder="Nome" aria-label="Nome (opcional)" class="w-full px-4 py-3.5 bg-nevoa border border-zinc-200 rounded-sm focus:bg-white focus:ring-2 focus:ring-vermelho focus:border-transparent outline-none transition">
+              <input id="den-telefone" type="tel" maxlength="20" autocomplete="tel" placeholder="Telefone" aria-label="Telefone (opcional)" class="w-full px-4 py-3.5 bg-nevoa border border-zinc-200 rounded-sm focus:bg-white focus:ring-2 focus:ring-vermelho focus:border-transparent outline-none transition">
+              <input id="den-email" type="email" maxlength="255" autocomplete="email" placeholder="E-mail" aria-label="E-mail (opcional)" class="w-full px-4 py-3.5 bg-nevoa border border-zinc-200 rounded-sm focus:bg-white focus:ring-2 focus:ring-vermelho focus:border-transparent outline-none transition">
+            </div>
+            <p class="mt-3 text-xs text-zinc-500">Só preencha se quiser que a gente fale com você sobre o caso.</p>
+          </details>
+          <!-- armadilha para robôs: pessoa de verdade não vê nem preenche -->
+          <input type="text" id="den-site" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div id="den-aviso" class="hidden" role="status"></div>
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+            <button type="submit" id="den-enviar" class="px-7 py-4 bg-preto hover:bg-vermelho text-white font-titulo font-extrabold uppercase tracking-wider text-sm rounded-sm transition-colors flex items-center justify-center gap-2"><i data-lucide="lock" class="w-4 h-4"></i> Enviar denúncia</button>
+            <p class="text-xs text-zinc-500">Sigilo garantido. Não aceitamos retaliação contra quem denuncia de boa-fé.</p>
+          </div>
+        </div>
+        <div id="den-sucesso" class="hidden text-center py-6" role="status">
+          <span class="inline-flex w-14 h-14 rounded-full bg-vermelho-claro text-vermelho-escuro items-center justify-center"><i data-lucide="check" class="w-7 h-7"></i></span>
+          <h2 class="mt-4 font-titulo text-xl font-extrabold text-preto uppercase tracking-wide">Denúncia recebida</h2>
+          <p class="mt-2 text-zinc-600 leading-relaxed">Seu protocolo é <strong id="den-protocolo" class="text-preto"></strong>. Guarde este número.</p>
+          <button type="button" id="den-nova" class="mt-5 text-sm font-bold underline text-vermelho-escuro">Fazer outra denúncia</button>
+        </div>
+      </form>
+    </main>
+
+    <!-- ==================== 7. COLABORADOR ==================== -->
+    <main id="tab-colaborador" class="tab-content flex-1 max-w-6xl mx-auto px-6 py-16 w-full">
+      <div class="relative overflow-hidden bg-preto p-9 sm:p-12 text-white">
+        <svg class="absolute left-0 top-4 w-full h-24 pointer-events-none opacity-80" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M -10 80 C 300 10, 700 0, 1010 40" fill="none" stroke="#FE0912" stroke-width="3"/>
+        </svg>
+        <div class="relative max-w-2xl pt-6">
+          <p class="rotulo text-vermelho mb-3">Área do colaborador</p>
+          <h1 class="font-titulo text-3xl sm:text-5xl font-black uppercase tracking-tight">Portal Conecta</h1>
+          <p class="mt-4 text-zinc-300 text-lg leading-relaxed">O seu acesso ao RH: tudo o que você precisa, num só lugar e pelo celular.</p>
+          <div class="mt-8 flex flex-col sm:flex-row gap-3">
+            <a data-portal="index.html" class="px-7 py-4 bg-vermelho hover:bg-vermelho-escuro text-white font-titulo font-extrabold uppercase tracking-wider text-sm rounded-sm transition-colors flex items-center justify-center gap-2"><i data-lucide="log-in" class="w-4 h-4"></i> Já tenho login</a>
+            <a data-portal="primeiro-acesso.html" class="px-7 py-4 bg-white text-preto hover:bg-zinc-200 font-titulo font-extrabold uppercase tracking-wider text-sm rounded-sm transition-colors flex items-center justify-center gap-2"><i data-lucide="user-plus" class="w-4 h-4"></i> Primeiro acesso</a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-5 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white p-6 shadow-sm border-t-2 border-vermelho"><i data-lucide="file-heart" class="w-6 h-6 text-vermelho-escuro"></i><h3 class="mt-4 font-titulo font-extrabold text-preto uppercase tracking-wide">Atestados</h3><p class="mt-1 text-sm text-zinc-600">Envie a foto ou o PDF e acompanhe a análise.</p></div>
+        <div class="bg-white p-6 shadow-sm border-t-2 border-vermelho"><i data-lucide="megaphone" class="w-6 h-6 text-vermelho-escuro"></i><h3 class="mt-4 font-titulo font-extrabold text-preto uppercase tracking-wide">Comunicados</h3><p class="mt-1 text-sm text-zinc-600">Avisos do RH com registro de leitura.</p></div>
+        <div class="bg-white p-6 shadow-sm border-t-2 border-vermelho"><i data-lucide="message-circle-heart" class="w-6 h-6 text-vermelho-escuro"></i><h3 class="mt-4 font-titulo font-extrabold text-preto uppercase tracking-wide">Ouvidoria</h3><p class="mt-1 text-sm text-zinc-600">Denúncias, sugestões e elogios, com anonimato.</p></div>
+        <div class="bg-white p-6 shadow-sm border-t-2 border-vermelho"><i data-lucide="receipt-text" class="w-6 h-6 text-vermelho-escuro"></i><h3 class="mt-4 font-titulo font-extrabold text-preto uppercase tracking-wide">Holerites</h3><p class="mt-1 text-sm text-zinc-600">Em breve: seus contracheques no portal.</p></div>
+      </div>
+      <div class="mt-5 bg-white p-9 sm:p-10 shadow-sm">
+        <h2 class="font-titulo text-2xl font-black text-preto uppercase">Programa de Integridade</h2>
+        <p class="mt-3 text-zinc-600 leading-relaxed">Diretrizes, normas e medidas para prevenir, detectar e corrigir desvios éticos. Todo colaborador deve conhecer o nosso Código de Conduta (disponível na aba Transparência) e usar a Ouvidoria sempre que presenciar algo errado.</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- Chamada final (aparece em todas as abas, menos em "Contrate") -->
+  <section id="chamada-final" class="bg-preto border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <h2 class="font-titulo text-2xl md:text-3xl font-black text-white uppercase">Pronto para elevar o <span class="text-vermelho">padrão</span> da sua operação?</h2>
+      <a href="#contrate" class="px-8 py-4 bg-vermelho hover:bg-vermelho-escuro text-white font-titulo font-extrabold uppercase tracking-wider text-sm rounded-sm transition-colors text-center whitespace-nowrap">Solicitar proposta</a>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="bg-black text-zinc-500 text-sm mt-auto">
+    <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-center gap-6">
+      <img src="img/logo.png" alt="Prime" class="h-8 w-auto">
+      <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2 font-semibold" aria-label="Links do rodapé">
+        <a href="#servicos" class="hover:text-white">Serviços</a>
+        <a href="#contrate" class="hover:text-white">Contrate</a>
+        <a href="#vagas" class="hover:text-white">Trabalhe conosco</a>
+        <a href="#transparencia" class="hover:text-white">Transparência</a>
+        <a href="#denuncia" class="hover:text-white">Canal Ético</a>
+        <a data-portal="portal.html" class="hover:text-white">Portal do Colaborador</a>
+      </nav>
+      <span class="text-center md:text-right text-xs uppercase tracking-wider"><span class="font-bold text-zinc-300">Prime</span> © <span data-ano></span> · <span data-cfg="cidade"></span></span>
+    </div>
+  </footer>
+
+  <!-- Botão do WhatsApp: aparece sozinho quando o número for colocado no bloco EDITE AQUI -->
+  <a id="botao-whatsapp" target="_blank" rel="noopener" aria-label="Falar no WhatsApp" title="Falar no WhatsApp" hidden><svg viewBox="0 0 32 32" width="30" height="30" fill="currentColor" aria-hidden="true"><path d="M16.04 3C8.86 3 3.03 8.82 3.03 16c0 2.3.6 4.54 1.75 6.52L3 29l6.65-1.74A12.95 12.95 0 0 0 16.04 29C23.2 29 29 23.18 29 16S23.2 3 16.04 3Zm0 23.62c-1.98 0-3.92-.53-5.61-1.54l-.4-.24-3.95 1.03 1.05-3.85-.26-.4A10.6 10.6 0 0 1 5.4 16c0-5.86 4.77-10.63 10.64-10.63 5.86 0 10.6 4.77 10.6 10.63 0 5.87-4.75 10.62-10.6 10.62Zm5.83-7.95c-.32-.16-1.89-.93-2.18-1.04-.29-.11-.5-.16-.72.16-.21.32-.82 1.04-1.01 1.25-.18.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.85-1.59-1.9-1.78-2.21-.18-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.18.21-.32.32-.53.1-.21.05-.4-.03-.56-.08-.16-.72-1.73-.98-2.37-.26-.62-.52-.53-.72-.54h-.61c-.21 0-.56.08-.85.4-.29.32-1.11 1.09-1.11 2.66 0 1.57 1.14 3.08 1.3 3.3.16.21 2.24 3.42 5.43 4.8.76.33 1.35.52 1.81.67.76.24 1.45.21 2 .13.61-.09 1.89-.77 2.15-1.52.27-.74.27-1.38.19-1.52-.08-.13-.29-.21-.61-.37Z"/></svg></a>
+
+  <script>
+    /* ==========================================================
+       ✏️ EDITE AQUI: dados da empresa (aparecem no site inteiro)
+       ========================================================== */
+    const CONFIG = {
+      empresa:  'Prime',
+      slug:     'prime',                             // identifica o site nos pedidos e no link do portal
+      telefone: '(85) 0000-0000',                    // TROCAR pelo telefone real
+      telLink:  '+558500000000',                     // o mesmo telefone, só números com +55
+      whatsapp: '',                                  // TROCAR: WhatsApp com DDD, ex.: '5585999999999' (vazio = botão escondido)
+      horario:  'Seg a Sex: 08h às 17h',
+      cidade:   'Fortaleza/CE',
+      endereco: 'Endereço a definir · Fortaleza/CE', // TROCAR pelo endereço real
+      email:    'contato@empresa.com.br',            // TROCAR: e-mail comercial
+      emailRh:  'rh@empresa.com.br',                 // TROCAR: e-mail que recebe currículos
+      emailEtica: 'etica@empresa.com.br',            // TROCAR: e-mail do canal ético
+      // Servidor Java que recebe os pedidos de orçamento (quando estiver na internet, troque pelo endereço dele)
+      api:      'http://localhost:8080',
+      // Portal Conecta (pasta "portal" do PortalConecta). Quando estiver na internet, troque pelo link dele.
+      portal:   '../../portal/',
+      // Serviços: aparecem no início, na aba Serviços e nas opções do pedido
+      servicos: [
+        { nome: 'Portaria e controle de acesso', icone: 'key-round', descricao: 'Portaria 12x36 ou 24h, controle de visitantes, veículos e correspondências.', funcoes: ['Porteiro(a)', 'Controlador(a) de acesso', 'Vigia', 'Folguista'] },
+        { nome: 'Recepção executiva', icone: 'concierge-bell', descricao: 'Atendimento de alto nível para recepções corporativas, clínicas e escritórios.', funcoes: ['Recepcionista executivo(a)', 'Telefonista', 'Atendente'] },
+        { nome: 'Limpeza técnica e conservação', icone: 'sparkles', descricao: 'Limpeza diária e técnica de ambientes corporativos, industriais e de saúde.', funcoes: ['Auxiliar de limpeza', 'Encarregado(a)', 'Limpador(a) de vidros'] },
+        { nome: 'Manutenção predial', icone: 'wrench', descricao: 'Manutenção preventiva e corretiva de elétrica, hidráulica, pintura e alvenaria.', funcoes: ['Oficial de manutenção', 'Eletricista', 'Bombeiro hidráulico', 'Pintor(a)'] },
+        { nome: 'Copeiragem executiva', icone: 'coffee', descricao: 'Serviço de copa para diretoria, reuniões e eventos internos.', funcoes: ['Copeiro(a)', 'Garçom/garçonete', 'Auxiliar de copa'] },
+        { nome: 'Jardinagem e paisagismo', icone: 'trees', descricao: 'Conservação de jardins, áreas verdes e paisagismo corporativo.', funcoes: ['Jardineiro(a)', 'Auxiliar de jardinagem'] },
+        { nome: 'Apoio operacional e logística', icone: 'package', descricao: 'Equipes para carga e descarga, almoxarifado, expedição e motoristas.', funcoes: ['Auxiliar de serviços gerais', 'Auxiliar de almoxarifado', 'Carregador(a)', 'Motorista'] },
+        { nome: 'Zeladoria e facilities', icone: 'building-2', descricao: 'Gestão do dia a dia do prédio: rondas, pequenos reparos e controle de fornecedores.', funcoes: ['Zelador(a)', 'Supervisor(a) de facilities'] }
+      ],
+      // Opções de "Modelo de contratação" no formulário (vão junto na mensagem do pedido)
+      modelos: ['Posto fixo', 'Cobertura', 'Equipe volante', 'Demanda pontual'],
+      // Documentos da aba Transparência: coloque o PDF na pasta "docs" e escreva o nome em "arquivo".
+      documentos: [
+        { titulo: 'Código de Conduta', icone: 'file-text', arquivo: '' },
+        { titulo: 'Medidas Disciplinares', icone: 'shield', arquivo: '' },
+        { titulo: 'Organograma', icone: 'network', arquivo: '' },
+        { titulo: 'Relatório de Transparência Salarial', icone: 'file-spreadsheet', arquivo: '' },
+        { titulo: 'Declaração de Igualdade Salarial', icone: 'file-check', arquivo: '' },
+        { titulo: 'Política de Privacidade (LGPD)', icone: 'lock', arquivo: '' }
+      ],
+      // Vagas abertas. Exemplo: { titulo: 'Porteiro', local: 'Fortaleza/CE', descricao: '...', requisito: 'Curso de porteiro' }
+      vagas: []
+    };
+    /* ========================================================== */
+
+    const $ = (id) => document.getElementById(id);
+    const esc = (t) => String(t ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const soNumeros = (v) => String(v || '').replace(/\D/g, '');
+
+    // ===== Textos e links que vêm do CONFIG =====
+    const links = {
+      tel: 'tel:' + CONFIG.telLink,
+      mailto: 'mailto:' + CONFIG.email,
+      mailtoEtica: 'mailto:' + CONFIG.emailEtica + '?subject=' + encodeURIComponent('Canal Ético - ' + CONFIG.empresa),
+      mapa: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(CONFIG.endereco)
+    };
+    document.querySelectorAll('[data-cfg]').forEach(el => el.textContent = CONFIG[el.dataset.cfg]);
+    document.querySelectorAll('[data-cfg-href]').forEach(el => el.href = links[el.dataset.cfgHref]);
+    document.querySelectorAll('[data-portal]').forEach(el => el.href = CONFIG.portal + el.dataset.portal + '?empresa=' + CONFIG.slug);
+    document.querySelectorAll('[data-ano]').forEach(el => el.textContent = new Date().getFullYear());
+
+    // ===== Serviços =====
+    $('servicos-destaque').innerHTML = CONFIG.servicos.slice(0, 6).map(s => `
+      <a href="#servicos" class="brilho group bg-white p-8 hover:bg-preto transition-colors">
+        <i data-lucide="${esc(s.icone)}" class="w-8 h-8 text-vermelho"></i>
+        <h3 class="mt-6 font-titulo text-lg font-extrabold uppercase tracking-wide text-preto group-hover:text-white transition-colors">${esc(s.nome)}</h3>
+        <p class="mt-2 text-zinc-600 group-hover:text-zinc-400 leading-relaxed transition-colors">${esc(s.descricao)}</p>
+      </a>`).join('');
+    $('servicos-lista').innerHTML = CONFIG.servicos.map((s, i) => `
+      <article class="bg-white shadow-sm grid md:grid-cols-12 gap-6 p-7 md:p-8 border-l-4 ${i % 2 ? 'border-preto' : 'border-vermelho'}">
+        <div class="md:col-span-5 flex gap-4">
+          <span class="w-12 h-12 bg-preto text-vermelho flex items-center justify-center shrink-0"><i data-lucide="${esc(s.icone)}" class="w-6 h-6"></i></span>
+          <div><h2 class="font-titulo text-xl font-extrabold text-preto uppercase tracking-wide">${esc(s.nome)}</h2><p class="mt-1 text-zinc-600 leading-relaxed">${esc(s.descricao)}</p></div>
+        </div>
+        <ul class="md:col-span-7 flex flex-wrap content-start gap-2">${s.funcoes.map(f => `<li class="px-3 py-1.5 bg-nevoa text-sm font-semibold text-zinc-700">${esc(f)}</li>`).join('')}</ul>
+      </article>`).join('');
+    const chip = (nome, grupo) => `
+      <label class="opcao cursor-pointer"><input type="checkbox" name="${grupo}" value="${esc(nome)}" class="sr-only">
+        <span class="inline-block px-4 py-2 border border-zinc-300 text-sm font-semibold text-zinc-700 hover:border-preto transition-colors">${esc(nome)}</span></label>`;
+    $('opcoes-servicos').innerHTML = [...CONFIG.servicos.map(s => s.nome), 'Outro'].map(n => chip(n, 'servico')).join('');
+    $('opcoes-modelo').innerHTML = CONFIG.modelos.map(n => chip(n, 'modelo')).join('');
+
+    // ===== Transparência: documento sem arquivo aparece como "Em breve" =====
+    $('lista-documentos').innerHTML = CONFIG.documentos.map(d => d.arquivo
+      ? `<a href="docs/${esc(d.arquivo)}" target="_blank" rel="noopener" class="group p-6 bg-white shadow-sm border-l-4 border-transparent hover:border-vermelho transition-colors flex items-center justify-between gap-4">
+           <span class="font-semibold text-preto">${esc(d.titulo)}</span>
+           <i data-lucide="${esc(d.icone)}" class="w-5 h-5 text-vermelho-escuro shrink-0"></i></a>`
+      : `<div class="p-6 bg-white/60 border border-dashed border-zinc-300 flex items-center justify-between gap-4">
+           <span class="font-semibold text-zinc-500">${esc(d.titulo)}</span>
+           <span class="rotulo text-[10px] text-zinc-400 bg-zinc-100 px-2.5 py-1">Em breve</span></div>`).join('');
+
+    // ===== Vagas (ou o convite para o banco de talentos) =====
+    const assuntoCurriculo = encodeURIComponent('Currículo - Banco de talentos ' + CONFIG.empresa);
+    $('lista-vagas').innerHTML = (CONFIG.vagas.length ? CONFIG.vagas.map(v => `
+      <div class="bg-white p-8 shadow-sm border-l-4 border-vermelho flex flex-col md:flex-row gap-6 md:items-center justify-between">
+        <div class="flex-1">
+          <h3 class="font-titulo text-2xl font-extrabold text-preto uppercase">${esc(v.titulo)}</h3>
+          <p class="text-zinc-600 mt-2 leading-relaxed">${esc(v.descricao)}</p>
+          <div class="flex flex-wrap gap-2 mt-4 text-xs font-semibold text-zinc-500 uppercase tracking-wide">
+            <span class="bg-nevoa px-2.5 py-1">Local: ${esc(v.local)}</span>
+            <span class="bg-nevoa px-2.5 py-1">Requisito: ${esc(v.requisito)}</span>
+          </div>
+        </div>
+        <a href="mailto:${esc(CONFIG.emailRh)}?subject=${encodeURIComponent('Candidatura: ' + v.titulo)}" class="px-6 py-3.5 bg-preto hover:bg-vermelho text-white font-titulo font-extrabold uppercase tracking-wider text-sm rounded-sm transition-colors text-center">Candidatar-se</a>
+      </div>`).join('') : '') + `
+      <div class="bg-white p-9 sm:p-12 text-center shadow-sm">
+        <i data-lucide="briefcase" class="w-10 h-10 text-vermelho mx-auto"></i>
+        <h3 class="mt-5 font-titulo text-2xl font-black text-preto uppercase">${CONFIG.vagas.length ? 'Não achou a sua vaga?' : 'No momento não há vagas abertas'}</h3>
+        <p class="mt-2 text-zinc-600 max-w-lg mx-auto">Envie o seu currículo para o nosso banco de talentos. Quando surgir uma oportunidade com o seu perfil, a gente entra em contato.</p>
+        <a href="mailto:${esc(CONFIG.emailRh)}?subject=${assuntoCurriculo}" class="mt-7 inline-flex px-7 py-4 bg-vermelho hover:bg-vermelho-escuro text-white font-titulo font-extrabold uppercase tracking-wider text-sm rounded-sm transition-colors items-center gap-2"><i data-lucide="send" class="w-4 h-4"></i> Enviar currículo</a>
+      </div>`;
+
+    // ===== Pedido de proposta: vai para o servidor Java (e o comercial recebe por e-mail) =====
+    const form = $('form-orcamento'), aviso = $('o-aviso');
+    function mostrarAviso(html, tipo) {
+      aviso.innerHTML = html;
+      aviso.className = 'p-4 text-sm font-semibold border-l-4 ' + (tipo === 'erro' ? 'bg-vermelho-claro text-vermelho-escuro border-vermelho' : 'bg-amber-50 text-amber-800 border-amber-400');
+    }
+    $('o-telefone').addEventListener('input', e => {
+      const d = soNumeros(e.target.value).slice(0, 11);
+      let t = d.replace(/^(\d{2})(\d)/, '($1) $2');
+      t = d.length > 10 ? t.replace(/(\d{5})(\d{4})$/, '$1-$2') : t.replace(/(\d{4})(\d{1,4})$/, '$1-$2');
+      e.target.value = t;
+    });
+    $('o-cnpj').addEventListener('input', e => {
+      const d = soNumeros(e.target.value).slice(0, 14);
+      e.target.value = d.replace(/^(\d{2})(\d)/, '$1.$2').replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3').replace(/\.(\d{3})(\d)/, '.$1/$2').replace(/(\d{4})(\d)/, '$1-$2');
+    });
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      aviso.className = 'hidden';
+      const servicos = [...form.querySelectorAll('input[name=servico]:checked')].map(i => i.value);
+      const modelos = [...form.querySelectorAll('input[name=modelo]:checked')].map(i => i.value);
+      const detalhes = $('o-msg').value.trim();
+      const dados = {
+        empresaSite: CONFIG.slug,
+        nome: $('o-nome').value.trim(),
+        empresaCliente: $('o-empresa').value.trim(),
+        cnpj: soNumeros($('o-cnpj').value),
+        telefone: soNumeros($('o-telefone').value),
+        email: $('o-email').value.trim(),
+        cidade: $('o-cidade').value.trim(),
+        servicos,
+        quantidade: $('o-qtd').value ? Number($('o-qtd').value) : null,
+        mensagem: (modelos.length ? 'Modelo de contratação: ' + modelos.join(', ') + (detalhes ? '\n\n' : '') : '') + detalhes,
+        site: form.elements.site.value
+      };
+      if (!servicos.length) return mostrarAviso('Marque pelo menos um serviço.', 'erro');
+      if (dados.nome.length < 2) { $('o-nome').focus(); return mostrarAviso('Informe o seu nome.', 'erro'); }
+      if (!dados.telefone && !dados.email) { $('o-telefone').focus(); return mostrarAviso('Informe um telefone ou e-mail para a gente responder.', 'erro'); }
+
+      const btn = $('o-enviar');
+      btn.disabled = true; btn.classList.add('opacity-70');
+      try {
+        const resp = await fetch(CONFIG.api + '/api/orcamentos', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(dados) });
+        const txt = await resp.text();
+        if (resp.ok) {
+          $('o-protocolo').textContent = JSON.parse(txt).protocolo;
+          form.reset(); form.classList.add('hidden'); $('o-sucesso').classList.remove('hidden');
+          $('o-sucesso').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          mostrarAviso(esc(txt || 'Não foi possível enviar. Confira os dados e tente de novo.'), 'erro');
+        }
+      } catch (_) {
+        const corpo = `Serviços: ${servicos.join(', ')}\nNome: ${dados.nome}\nEmpresa: ${dados.empresaCliente}\nTelefone: ${$('o-telefone').value}\nE-mail: ${dados.email}\nCidade: ${dados.cidade}\nProfissionais: ${dados.quantidade || ''}\n\n${dados.mensagem}`;
+        const mailto = 'mailto:' + CONFIG.email + '?subject=' + encodeURIComponent('Solicitação de proposta - ' + dados.nome) + '&body=' + encodeURIComponent(corpo);
+        mostrarAviso(`Não conseguimos enviar pelo site agora. <a class="underline" href="${mailto}">Envie por e-mail</a> ou ligue para ${esc(CONFIG.telefone)}.`, 'alerta');
+      }
+      btn.disabled = false; btn.classList.remove('opacity-70');
+    });
+    $('o-novo').addEventListener('click', () => { $('o-sucesso').classList.add('hidden'); form.classList.remove('hidden'); });
+
+    // ===== Abas pelo endereço (#servicos, #contrate...), igual ao site da Athos =====
+    const ABAS = ['inicio', 'servicos', 'contrate', 'vagas', 'transparencia', 'denuncia', 'colaborador'];
+    function mostrarAba() {
+      let aba = location.hash.replace('#', '') || 'inicio';
+      if (aba === 'contato') aba = 'contrate';
+      if (!ABAS.includes(aba)) aba = 'inicio';
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.toggle('active', el.id === 'tab-' + aba));
+      document.querySelectorAll('.nav-btn').forEach(el => el.classList.toggle('active', el.dataset.tab === aba));
+      $('chamada-final').classList.toggle('hidden', aba === 'contrate');
+      window.scrollTo(0, 0);
+    }
+    window.addEventListener('hashchange', mostrarAba);
+    mostrarAba();
+
+    // ===== Faixa de serviços e quantidades (vêm do CONFIG) =====
+    $('letreiro').innerHTML = CONFIG.servicos.map(s => `<span class="flex items-center gap-6 px-6 whitespace-nowrap">${esc(s.nome)}<span class="w-2.5 h-2.5 rotate-45 bg-white"></span></span>`).join('');
+    document.querySelectorAll('[data-qtd-servicos]').forEach(el => { el.dataset.contar = CONFIG.servicos.length; el.textContent = CONFIG.servicos.length; });
+    document.querySelectorAll('[data-qtd-modelos]').forEach(el => { el.dataset.contar = CONFIG.modelos.length; el.textContent = CONFIG.modelos.length; });
+
+    // ===== Canal Ético: denúncia pelo site (pode ser anônima; vai para a Ouvidoria do Painel do DP) =====
+    const MOTIVOS_DENUNCIA = ['Assédio moral ou sexual', 'Discriminação', 'Fraude ou corrupção', 'Descumprimento de normas', 'Conflito de interesses', 'Outros'];
+    $('den-motivos').innerHTML = MOTIVOS_DENUNCIA.map(m => `<label class="opcao cursor-pointer"><input type="radio" name="motivo" value="${esc(m)}" class="sr-only">
+      <span class="inline-block px-4 py-2 border border-zinc-300 text-sm font-semibold text-zinc-700 hover:border-preto transition-colors">${esc(m)}</span></label>`).join('');
+    const formDen = $('form-denuncia'), avisoDen = $('den-aviso');
+    const avisarDen = (html, tipo) => {
+      avisoDen.innerHTML = html;
+      avisoDen.className = 'p-4 text-sm font-semibold  ' + (tipo === 'erro' ? 'bg-red-50 text-red-700' : 'bg-amber-50 text-amber-800');
+    };
+    formDen.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      avisoDen.className = 'hidden';
+      const marcado = formDen.querySelector('input[name=motivo]:checked');
+      const relato = $('den-relato').value.trim();
+      if (!marcado) return avisarDen('Escolha o motivo da denúncia.', 'erro');
+      if (relato.length < 10) { $('den-relato').focus(); return avisarDen('Conte o que aconteceu (pelo menos algumas palavras).', 'erro'); }
+      const dados = { empresaSite: CONFIG.slug, motivo: marcado.value, relato,
+                      nome: $('den-nome').value.trim(), telefone: $('den-telefone').value.trim(), email: $('den-email').value.trim(),
+                      site: $('den-site').value };
+      const btn = $('den-enviar');
+      btn.disabled = true; btn.classList.add('opacity-70');
+      try {
+        const resp = await fetch(CONFIG.api + '/api/denuncias', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(dados) });
+        const txt = await resp.text();
+        if (resp.ok) {
+          $('den-protocolo').textContent = JSON.parse(txt).protocolo;
+          formDen.reset();
+          $('den-campos').classList.add('hidden'); $('den-sucesso').classList.remove('hidden');
+        } else {
+          avisarDen(esc(txt || 'Não foi possível enviar. Confira os dados e tente de novo.'), 'erro');
+        }
+      } catch (_) {
+        // Servidor fora do ar: oferece o e-mail do canal ético
+        avisarDen(`Não conseguimos enviar pelo site agora. <a class="underline" href="${links.mailtoEtica}">Escreva para o canal ético por e-mail</a> ou tente de novo mais tarde.`, 'alerta');
+      }
+      btn.disabled = false; btn.classList.remove('opacity-70');
+    });
+    $('den-nova').addEventListener('click', () => { $('den-sucesso').classList.add('hidden'); $('den-campos').classList.remove('hidden'); });
+
+    // ===== Botão do WhatsApp (só aparece com o número preenchido no CONFIG) =====
+    const zap = String(CONFIG.whatsapp || '').replace(/\D/g, '');
+    if (zap.length >= 12) {
+      const b = $('botao-whatsapp');
+      b.href = 'https://wa.me/' + zap + '?text=' + encodeURIComponent('Olá! Vim pelo site da ' + CONFIG.empresa + ' e gostaria de mais informações.');
+      b.hidden = false;
+    }
+
+    // ===== VERSÃO DE DEMONSTRAÇÃO (gerada por ferramentas/publicar_demo.py) =====
+    (function () {
+      function aviso(texto) {
+        let caixa = document.getElementById('aviso-demo');
+        if (!caixa) {
+          caixa = document.createElement('div');
+          caixa.id = 'aviso-demo';
+          caixa.setAttribute('role', 'status');
+          caixa.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);width:max-content;max-width:min(92vw,520px);'
+            + 'background:#111827;color:#fff;padding:14px 18px;border-radius:12px;font:600 15px/1.45 system-ui,sans-serif;'
+            + 'box-shadow:0 10px 30px rgba(0,0,0,.3);z-index:9999;text-align:center';
+          document.body.appendChild(caixa);
+        }
+        caixa.textContent = texto;
+        caixa.style.display = 'block';
+        clearTimeout(aviso.tempo);
+        aviso.tempo = setTimeout(() => { caixa.style.display = 'none'; }, 6000);
+      }
+      // Portal do Colaborador: ainda não publicado
+      document.addEventListener('click', (e) => {
+        if (e.target.closest('[data-portal]')) {
+          e.preventDefault();
+          aviso('O Portal do Colaborador está em fase de testes e será liberado em breve.');
+        }
+      }, true);
+      // Formulário "Contrate": o servidor Java ainda não está na internet. Não tenta chamar o
+      // localhost (o Chrome pediria permissão a quem abrir o site); o site mostra a opção de e-mail.
+      const fetchOriginal = window.fetch;
+      window.fetch = (url, opcoes) => String(url).includes('/api/')
+        ? Promise.reject(new Error('demonstração: servidor ainda não publicado'))
+        : fetchOriginal(url, opcoes);
+    })();
+    lucide.createIcons();
+  </script>
+
+  <!-- Efeitos de movimento: ficam separados para nunca esconder o conteúdo se outra parte der erro -->
+  <script>
+    // ===== Efeitos: aparecer ao rolar, números que contam, brilho do mouse, barra de leitura e faixa =====
+    (() => {
+      const calmo = matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window);
+      // Grupos: cada item aparece um pouquinho depois do anterior
+      document.querySelectorAll('[data-revelar-grupo]').forEach(grupo => [...grupo.children].forEach((item, i) => {
+        item.setAttribute('data-revelar', '');
+        item.style.setProperty('--atraso', (i * 0.09).toFixed(2) + 's');
+      }));
+      const contar = (el) => {
+        const fim = Number(el.dataset.contar), sufixo = el.dataset.sufixo || '', inicio = performance.now();
+        const passo = (agora) => {
+          const p = Math.min(1, (agora - inicio) / 1500);
+          el.textContent = Math.round(fim * (1 - Math.pow(1 - p, 3))) + sufixo;
+          if (p < 1) requestAnimationFrame(passo);
+        };
+        requestAnimationFrame(passo);
+      };
+      const mostrar = (el) => {
+        el.classList.add('visivel');
+        if (el.dataset.contar) contar(el);
+        // Depois que apareceu, devolve os efeitos normais de passar o mouse
+        setTimeout(() => el.removeAttribute('data-revelar'), 1600);
+      };
+      const pendentes = new Set();
+      const revelar = (el) => { if (!pendentes.delete(el)) return; mostrar(el); if (olho) olho.unobserve(el); };
+      const olho = calmo ? null : new IntersectionObserver((itens) => itens.forEach(e => {
+        if (e.isIntersecting) revelar(e.target);
+      }), { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+      document.querySelectorAll('[data-revelar], [data-contar]').forEach(el => {
+        if (calmo) { el.classList.add('visivel'); return; }
+        if (el.dataset.contar) el.textContent = '0' + (el.dataset.sufixo || '');
+        pendentes.add(el);
+        olho.observe(el);
+      });
+      // Rede de segurança: se o navegador demorar para avisar, a página confere sozinha o que já está na tela
+      if (!calmo) {
+        const conferir = () => {
+          pendentes.forEach(el => {
+            const r = el.getBoundingClientRect();
+            if (r.height > 0 && r.top < innerHeight - 30 && r.bottom > 0) revelar(el);
+          });
+          if (!pendentes.size) clearInterval(relogio);
+        };
+        const relogio = setInterval(conferir, 700);
+      }
+      // Brilho que segue o mouse nos cartões
+      document.addEventListener('pointermove', (e) => {
+        const c = e.target.closest && e.target.closest('.brilho');
+        if (!c) return;
+        const r = c.getBoundingClientRect();
+        c.style.setProperty('--x', (e.clientX - r.left) + 'px');
+        c.style.setProperty('--y', (e.clientY - r.top) + 'px');
+      }, { passive: true });
+      // Barra de leitura no alto
+      const barra = document.getElementById('progresso');
+      const medir = () => {
+        const h = document.documentElement;
+        barra.style.transform = 'scaleX(' + (h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight)).toFixed(4) + ')';
+      };
+      addEventListener('scroll', medir, { passive: true });
+      addEventListener('hashchange', () => setTimeout(medir, 60));
+      medir();
+      // Faixa: repete a lista para correr sem emenda
+      document.querySelectorAll('.letreiro').forEach(l => { l.innerHTML += l.innerHTML; });
+    })();
+  </script>
+
+  <!-- Menu do celular (três barrinhas): mostra todas as partes do site numa lista -->
+  <script>
+    (() => {
+      const botao = document.getElementById('menu-botao'), painel = document.getElementById('menu-celular');
+      const lista = document.getElementById('menu-celular-lista'), fundo = document.getElementById('menu-fundo');
+      if (!botao || !painel || !lista) return;
+      // Os mesmos itens do menu do computador (assim, mudou lá, muda aqui)
+      lista.innerHTML = [...document.querySelectorAll('header nav .nav-btn')].map(a =>
+        `<li><a href="${a.getAttribute('href')}" data-tab="${a.dataset.tab}" class="item-menu ">${a.textContent.trim()}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a></li>`).join('');
+      const marcar = () => {
+        const aba = document.querySelector('.tab-content.active');
+        const atual = aba ? aba.id.replace('tab-', '') : 'inicio';
+        lista.querySelectorAll('a').forEach(a => {
+          const ativo = a.dataset.tab === atual;
+          a.classList.toggle('ativo', ativo);
+          if (ativo) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+        });
+      };
+      const abrir = () => {
+        marcar();
+        painel.hidden = false; fundo.hidden = false;
+        botao.setAttribute('aria-expanded', 'true'); botao.setAttribute('aria-label', 'Fechar o menu');
+        document.body.style.overflow = 'hidden';
+        const primeiro = lista.querySelector('a');
+        if (primeiro) primeiro.focus({ preventScroll: true });
+      };
+      const fechar = (devolverFoco) => {
+        if (painel.hidden) return;
+        painel.hidden = true; fundo.hidden = true;
+        botao.setAttribute('aria-expanded', 'false'); botao.setAttribute('aria-label', 'Abrir o menu');
+        document.body.style.overflow = '';
+        if (devolverFoco) botao.focus();
+      };
+      botao.addEventListener('click', () => (painel.hidden ? abrir() : fechar(true)));
+      fundo.addEventListener('click', () => fechar(false));
+      painel.addEventListener('click', (e) => { if (e.target.closest('a')) fechar(false); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') fechar(true); });
+      addEventListener('resize', () => { if (innerWidth >= 1024) fechar(false); });
+      addEventListener('hashchange', () => setTimeout(marcar, 0));
+    })();
+  </script>
+</body>
+</html>
